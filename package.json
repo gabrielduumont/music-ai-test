@@ -2,8 +2,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "npm run tsc && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "tsc": "tsc",
+    "tsc:check": "tsc --noEmit",
+    "type-check": "tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
     "next": "latest",
@@ -13,6 +17,8 @@
   "devDependencies": {
     "@types/node": "^22.5.0",
     "@types/react": "^18.3.4",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.6",
     "typescript": "^5.5.4"
   }
 }
