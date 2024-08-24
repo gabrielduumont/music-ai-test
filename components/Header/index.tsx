@@ -10,9 +10,9 @@ type HeaderProps = {
 export default function Header({ showSearch }: HeaderProps) {
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>
+      <p className={styles.title}>
         <Link href={routes.home}>{APP_TITLE}</Link>
-      </h1>
+      </p>
       {showSearch && (
         <div>
           {/* Deal with responsivity once we got the search component ready and the details page ready to work */}
