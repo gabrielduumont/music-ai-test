@@ -1,11 +1,11 @@
 import Layout from '@app/components/Layout';
-import UserLibrary from '@app/components/UserLibrary';
+import UserLibraryInfo from '@app/components/UserLibraryInfo';
 
 export default function HomePage() {
   return (
     <Layout>
       <div style={{ padding: '50px 145px' }}>
-        <UserLibrary />
+        <UserLibraryInfo />
       </div>
     </Layout>
   );
