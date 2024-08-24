@@ -20,8 +20,16 @@ type UserLibraryProps = {
   originalSongs: Song[];
 };
 
+const getValidSongsArray = (songs: Song[]) => {
+  if (!songs || !songs.length) {
+    return [];
+  }
+
+  return songs;
+};
+
 export default function UserLibrary({ originalSongs }: UserLibraryProps) {
-  const [songs, setSongs] = useState<Song[]>(originalSongs);
+  const [songs, setSongs] = useState<Song[]>(getValidSongsArray(originalSongs));
   const [{ favoriteSongIds }] = useSongsContext();
 
   const onSortSong = (shouldSortAlphabetically: boolean) => {
