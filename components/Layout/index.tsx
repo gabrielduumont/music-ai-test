@@ -1,5 +1,6 @@
 import Header from '@app/components/Header';
 import PageHead from '@app/components/PageHead';
+import styles from './styles.module.scss';
 
 type LayoutProps = {
   children: React.ReactElement;
@@ -15,10 +16,13 @@ export default function Layout({
   return (
     <>
       <PageHead title={pageTitle} />
-      <div>
-        <Header showSearch={showHeaderSearch} />
-        <div>
-          <>{children}</>
+      <Header showSearch={showHeaderSearch} />
+
+      <div className={styles['padded-container']}>
+        <div className={styles['scrollable-container']}>
+          <div className={styles.container}>
+            <>{children}</>
+          </div>
         </div>
       </div>
     </>
