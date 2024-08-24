@@ -3,7 +3,7 @@ import PageHead from '@app/components/PageHead';
 import styles from './styles.module.scss';
 
 type LayoutProps = {
-  children: React.ReactElement;
+  children: React.ReactElement | React.ReactElement[];
   showHeaderSearch?: boolean;
   pageTitle?: string;
 };

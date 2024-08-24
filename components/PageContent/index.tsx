@@ -1,8 +1,7 @@
-import Layout from '@app/components/Layout';
 import styles from './styles.module.scss';
 
 type PageContentProps = {
-  children: React.ReactElement;
+  children: React.ReactElement | React.ReactElement[];
 };
 
 export default function PageContent({ children }: PageContentProps) {
