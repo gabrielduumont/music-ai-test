@@ -3,12 +3,25 @@ import styles from './styles.module.scss';
 import Heart from '@app/components/Icons/Heart';
 import Link from 'next/link';
 import { routes } from '@app/utils/constants/routes';
+import { useSongsContext } from '@app/contexts/SongsContext';
+import { useEffect, useState } from 'react';
 
 type SongCardProps = {
   songEntry: Song;
 };
 
 export default function SongCard({ songEntry }: SongCardProps) {
+  const [{ favoriteSongIds }, { toggleFavorite, isSongFavorite }] =
+    useSongsContext();
+
+  const [isThisSongFavorite, setIsThisSongFavorite] = useState(
+    isSongFavorite(`${songEntry.id}`)
+  );
+
+  useEffect(() => {
+    setIsThisSongFavorite(isSongFavorite(`${songEntry.id}`));
+  }, [favoriteSongIds]);
+
   return (
     <div className={styles.container}>
       <Link href={routes.songDetails(`${songEntry.id}`)}>
@@ -27,8 +40,11 @@ export default function SongCard({ songEntry }: SongCardProps) {
         </div>
         <div className={styles['description-row']}>
           <div className={styles['song-artist']}>{songEntry.song.artist}</div>
-          <div className={styles['song-favorite']}>
-            <Heart />
+          <div
+            className={styles['song-favorite']}
+            onClick={() => toggleFavorite(`${songEntry.id}`)}
+          >
+            <Heart isFilled={isThisSongFavorite} />
           </div>
         </div>
       </div>

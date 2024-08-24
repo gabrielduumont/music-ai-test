@@ -1,5 +1,6 @@
 import Header from '@app/components/Header';
 import PageHead from '@app/components/PageHead';
+import SongsContextContainer from '@app/contexts/SongsContext';
 import styles from './styles.module.scss';
 
 type LayoutProps = {
@@ -14,17 +15,19 @@ export default function Layout({
   pageTitle,
 }: LayoutProps) {
   return (
-    <>
-      <PageHead title={pageTitle} />
-      <Header showSearch={showHeaderSearch} />
+    <SongsContextContainer>
+      <>
+        <PageHead title={pageTitle} />
+        <Header showSearch={showHeaderSearch} />
 
-      <div className={styles['padded-container']}>
-        <div className={styles['scrollable-container']}>
-          <div className={styles.container}>
-            <>{children}</>
+        <div className={styles['padded-container']}>
+          <div className={styles['scrollable-container']}>
+            <div className={styles.container}>
+              <>{children}</>
+            </div>
           </div>
         </div>
-      </div>
-    </>
+      </>
+    </SongsContextContainer>
   );
 }

@@ -12,17 +12,22 @@ type UserLibraryInfoProps = {
   totalSongs?: number;
   searchOptions?: SearchOption[];
   onToggleAlphabeticalSort?: (shouldSort: boolean) => void;
+  onToggleFavoriteFilter?: (shouldFilter: boolean) => void;
 };
 
 export default function UserLibraryInfo({
   totalSongs,
   searchOptions,
   onToggleAlphabeticalSort,
+  onToggleFavoriteFilter,
 }: UserLibraryInfoProps) {
   const options = searchOptions && searchOptions.length ? searchOptions : [];
   return (
     <div className={styles.container}>
-      <LibraryDescription totalSongs={totalSongs} />
+      <LibraryDescription
+        totalSongs={totalSongs}
+        onToggleFavoriteButton={onToggleFavoriteFilter}
+      />
       <div className={styles['sort-and-search']}>
         <ToggleButton
           label="Sort from A-Z"

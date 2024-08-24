@@ -3,10 +3,12 @@ import styles from './styles.module.scss';
 
 type LibraryDescriptionProps = {
   totalSongs?: number;
+  onToggleFavoriteButton?: (shouldFilter: boolean) => void;
 };
 
 export default function LibraryDescription({
   totalSongs,
+  onToggleFavoriteButton,
 }: LibraryDescriptionProps) {
   const total = totalSongs || 0;
   return (
@@ -14,7 +16,7 @@ export default function LibraryDescription({
       <div className={styles['title-row']}>
         <div className={styles.title}>Your Library</div>
         <div>
-          <FavoriteButton />
+          <FavoriteButton onClick={onToggleFavoriteButton} />
         </div>
       </div>
       <div className={styles.description}>
