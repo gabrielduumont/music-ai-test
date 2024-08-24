@@ -110,7 +110,22 @@ export default function SearchInput({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [wrapperRef, isEmpty]);
+  }, [wrapperRef, isEmpty, isFocused]);
+
+  useEffect(() => {
+    const recalculateDropdownDisplayProps = () => {
+      setIsFocused(false);
+      if (isEmpty) {
+        setSearchResults([]);
+      }
+    };
+
+    window.addEventListener('resize', recalculateDropdownDisplayProps);
+
+    return () => {
+      window.addEventListener('resize', recalculateDropdownDisplayProps);
+    };
+  }, [isFocused, isEmpty]);
 
   return (
     <div ref={wrapperRef} className={styles.wrapper}>
