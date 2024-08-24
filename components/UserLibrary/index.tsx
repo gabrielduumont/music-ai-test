@@ -4,17 +4,7 @@ import { Song } from '@app/data-types/song';
 import lodash from 'lodash';
 import { useState } from 'react';
 import { useSongsContext } from '@app/contexts/SongsContext';
-
-const getSearchOptionsFromSongs = (songs: Song[]) => {
-  if (!songs || !songs.length) {
-    return [];
-  }
-
-  return songs.map((songEntry) => ({
-    id: `${songEntry.id}`,
-    value: songEntry.song.title,
-  }));
-};
+import { getSearchOptionsFromSongs } from '@app/utils/getSearchOptionsFromSongs';
 
 type UserLibraryProps = {
   originalSongs: Song[];

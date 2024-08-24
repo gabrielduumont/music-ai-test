@@ -2,11 +2,7 @@ import ToggleButton from '@app/components/Buttons/ToggleButton';
 import LibraryDescription from './LibraryDescription';
 import styles from './styles.module.scss';
 import SearchInput from '@app/components/SearchInput';
-import { GenericTypeWithId } from '@app/utils/types';
-
-type SearchOption = GenericTypeWithId<{
-  value: string;
-}>;
+import { SearchOption } from '@app/utils/types';
 
 type UserLibraryInfoProps = {
   totalSongs?: number;
