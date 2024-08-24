@@ -1,0 +1,40 @@
+@import '@app/styles/colors.scss';
+
+.container {
+  display: inline-flex;
+  height: 36px;
+  padding: 0px 24px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  border-radius: 100px;
+  background: $color-dark-gray-1;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &[data-disabled='true'] {
+    cursor: not-allowed !important;
+  }
+
+  &:hover {
+    background: $color-dark-gray-2;
+  }
+
+  &[data-checked='true'] {
+    background: $color-dark-gray-2;
+    &:hover {
+      background: $color-dark-gray-3;
+    }
+  }
+}
+
+.label {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%; /* 16.8px */
+  color: $color-white;
+}
