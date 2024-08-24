@@ -1,5 +1,6 @@
 import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import '@app/styles/globals.css';
+
 type MuseAIAppProps = {};
 
 export default function MuseAI({

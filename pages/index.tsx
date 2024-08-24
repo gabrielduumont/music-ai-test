@@ -1,10 +1,9 @@
-import PageHead from '@app/components/PageHead';
+import Layout from '@app/components/Layout';
 
 export default function HomePage() {
   return (
-    <>
-      <PageHead />
+    <Layout>
       <div>HOME</div>
-    </>
+    </Layout>
   );
 }
