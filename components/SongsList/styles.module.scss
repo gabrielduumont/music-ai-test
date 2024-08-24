@@ -1,0 +1,19 @@
+@import '@app/styles/sizes.scss';
+@import '@app/styles/colors.scss';
+
+.empty {
+  width: 100%;
+  color: $color-white;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 19.2px */
+}
+
+.list-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 34px;
+}
