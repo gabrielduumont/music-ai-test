@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { routes } from '@app/utils/constants/routes';
 import { useSongsContext } from '@app/contexts/SongsContext';
 import { useEffect, useState } from 'react';
+import { getBackgroundImageUrl } from '@app/utils/getBackgroundImageUrl';
 
 type SongCardProps = {
   songEntry: Song;
@@ -29,7 +30,9 @@ export default function SongCard({ songEntry }: SongCardProps) {
         <div
           className={styles.background}
           style={{
-            backgroundImage: `url(/assets/images/${songEntry.song.files.coverArt})`,
+            backgroundImage: getBackgroundImageUrl(
+              songEntry.song.files.coverArt
+            ),
           }}
         />
       </Link>

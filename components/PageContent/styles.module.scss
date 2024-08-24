@@ -9,3 +9,26 @@
     padding: 50px 40px;
   }
 }
+
+.container-no-padding {
+  width: 100%;
+  height: 100%;
+
+  &[data-background='true'] {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+}
+
+.background-overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #12303b 0%, rgba(18, 48, 59, 0) 100%);
+  padding: 50px 145px;
+  backdrop-filter: blur(2px);
+
+  @media (max-width: $aboveMobile) {
+    padding: 50px 40px;
+  }
+}

@@ -7,6 +7,7 @@ import { getSearchOptionsFromSongs } from '@app/utils/getSearchOptionsFromSongs'
 import { getSongById } from '@app/services/songs/getSongById';
 import { useEffect } from 'react';
 import PageContent from '@app/components/PageContent';
+import SongPlayer from '@app/components/SongPlayer';
 
 export const getServerSideProps = (async (context) => {
   try {
@@ -48,8 +49,8 @@ export default function SongDetailsPage({
       showHeaderSearch
       searchOptions={getSearchOptionsFromSongs(songs)}
     >
-      <PageContent>
-        <p>SongId: {router.query.songId}</p>
+      <PageContent backgroundImgUrl={song.song.files.poster}>
+        <SongPlayer song={song} songs={songs} />
       </PageContent>
     </Layout>
   );

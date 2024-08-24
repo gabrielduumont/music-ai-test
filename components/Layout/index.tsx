@@ -23,11 +23,9 @@ export default function Layout({
         <PageHead title={pageTitle} />
         <Header showSearch={showHeaderSearch} searchOptions={searchOptions} />
 
-        <div className={styles['padded-container']}>
-          <div className={styles['scrollable-container']}>
-            <div className={styles.container}>
-              <>{children}</>
-            </div>
+        <div className={styles['scrollable-container']}>
+          <div className={styles.container}>
+            <>{children}</>
           </div>
         </div>
       </>
