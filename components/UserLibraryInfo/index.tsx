@@ -1,3 +1,4 @@
+import ToggleButton from '@app/components/Buttons/ToggleButton';
 import LibraryDescription from './LibraryDescription';
 import styles from './styles.module.scss';
 
@@ -9,7 +10,7 @@ export default function UserLibraryInfo({ totalSongs }: UserLibraryInfoProps) {
   return (
     <div className={styles.container}>
       <LibraryDescription totalSongs={totalSongs} />
-      <div>ALPHA_SORT</div>
+      <ToggleButton label="Sort from A-Z" />
       <div>SEARCH</div>
     </div>
   );
