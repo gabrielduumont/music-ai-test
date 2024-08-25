@@ -23,6 +23,14 @@ export default function Player({ song }: PlayerProps) {
     setIsPlaying(!isPlaying);
   };
 
+  const handleSliderChange = (newPercentage: number) => {
+    if (audioRef.current && duration) {
+      const newTime = (newPercentage / 100) * duration;
+      audioRef.current.currentTime = newTime;
+      setCurrentTime(newTime);
+    }
+  };
+
   useEffect(() => {
     if (audioRef.current) {
       if (isPlaying) {
@@ -92,7 +100,7 @@ export default function Player({ song }: PlayerProps) {
         </div>
         <div className={styles.timer}>
           <div>
-            <Slider percentage={percentage} />
+            <Slider percentage={percentage} onChange={handleSliderChange} />
           </div>
           <div className={styles['time-container']}>
             <div className={styles.time}>{formatTime(currentTime)}</div>

@@ -13,6 +13,7 @@
   height: 204px;
   border: 1px solid $color-dark-gray-6;
   background-size: cover;
+  background-position: center;
   border-radius: 5px;
 }
 
@@ -21,6 +22,10 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+}
+
+.play-control {
+  cursor: pointer;
 }
 
 .description {
