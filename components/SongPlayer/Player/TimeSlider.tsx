@@ -26,8 +26,6 @@ export default function TimeSlider({
   const percentage = duration ? (currentTime / duration) * 100 : 0;
   const remainingTime = duration - currentTime;
 
-  console.log({ duration, audioRef });
-
   return (
     <div className={styles.timer}>
       <div>
