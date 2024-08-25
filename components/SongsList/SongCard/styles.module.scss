@@ -2,7 +2,8 @@
 @import '@app/styles/colors.scss';
 
 .container {
-  width: 204px;
+  min-width: 204px;
+  flex: 1;
   height: 282px;
   background-color: $color-dark-gray-5;
   border-radius: 5px;
@@ -20,6 +21,10 @@
 }
 
 .background {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   height: 70%;
   width: 100%;
   border-radius: 5px;
