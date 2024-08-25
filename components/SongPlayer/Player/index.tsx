@@ -41,8 +41,9 @@ export default function Player({ song }: PlayerProps) {
       audioRef.current.addEventListener('timeupdate', updateTime);
 
       return () => {
-        if (audioRef.current) {
-          audioRef.current.removeEventListener('timeupdate', updateTime);
+        const audioElement = document.getElementById('audio-player');
+        if (audioElement) {
+          audioElement.removeEventListener('timeupdate', updateTime);
         }
       };
     }
@@ -68,7 +69,7 @@ export default function Player({ song }: PlayerProps) {
       <div className={styles.controls}>
         <div className={styles.description}>
           <div className={styles['play-control']} onClick={togglePlayPause}>
-            <audio ref={audioRef} src={audioURL} />
+            <audio id="audio-player" ref={audioRef} src={audioURL} />
             {!isPlaying ? <Play /> : <Pause />}
           </div>
           <div className={styles['play-description']}>
