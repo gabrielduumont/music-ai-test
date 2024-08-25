@@ -1,28 +1,18 @@
 import { Song } from '@app/data-types/song';
 import styles from './styles.module.scss';
-import Heart from '@app/components/Icons/Heart';
 import Link from 'next/link';
 import { routes } from '@app/utils/constants/routes';
 import { useSongsContext } from '@app/contexts/SongsContext';
 import { useEffect, useState } from 'react';
 import { getBackgroundImageUrl } from '@app/utils/getBackgroundImageUrl';
+import FavoriteIconButton from '@app/components/Buttons/FavoriteIconButton';
 
 type SongCardProps = {
   songEntry: Song;
 };
 
 export default function SongCard({ songEntry }: SongCardProps) {
-  const [{ favoriteSongIds }, { toggleFavorite, isSongFavorite }] =
-    useSongsContext();
   const songId = `${songEntry.id}`;
-
-  const [isThisSongFavorite, setIsThisSongFavorite] = useState(
-    isSongFavorite(songId)
-  );
-
-  useEffect(() => {
-    setIsThisSongFavorite(isSongFavorite(songId));
-  }, [favoriteSongIds, isSongFavorite, songId]);
 
   return (
     <div className={styles.container}>
@@ -42,12 +32,7 @@ export default function SongCard({ songEntry }: SongCardProps) {
         </div>
         <div className={styles['description-row']}>
           <div className={styles['song-artist']}>{songEntry.song.artist}</div>
-          <div
-            className={styles['song-favorite']}
-            onClick={() => toggleFavorite(songId)}
-          >
-            <Heart isFilled={isThisSongFavorite} />
-          </div>
+          <FavoriteIconButton songId={songId} />
         </div>
       </div>
     </div>

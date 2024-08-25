@@ -1,4 +1,6 @@
 import { Song } from '@app/data-types/song';
+import styles from './styles.module.scss';
+import Player from './Player';
 
 type SongPlayerProps = {
   song: Song;
@@ -6,5 +8,9 @@ type SongPlayerProps = {
 };
 
 export default function SongPlayer({ songs, song }: SongPlayerProps) {
-  return <p>SongId: {song.id}</p>;
+  return (
+    <div className={styles.container}>
+      <Player song={song} />
+    </div>
+  );
 }
