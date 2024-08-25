@@ -1,12 +1,12 @@
 import { Song } from '@app/data-types/song';
 import styles from './styles.module.scss';
 import { getBackgroundImageUrl } from '@app/utils/getBackgroundImageUrl';
-import FavoriteIconButton from '@app/components/Buttons/FavoriteIconButton';
-import Slider from '@app/components/Slider';
 import { useEffect, useRef, useState } from 'react';
 import Play from '@app/components/Icons/Play';
 import Pause from '@app/components/Icons/Pause';
 import { getAudioUrl } from '@app/utils/getAudioUrl';
+import TimeSlider from './TimeSlider';
+import SongInfo from './SongInfo';
 
 type PlayerProps = {
   song: Song;
@@ -23,15 +23,19 @@ export default function Player({ song }: PlayerProps) {
     setIsPlaying(!isPlaying);
   };
 
-  const handleSliderChange = (newPercentage: number) => {
-    if (audioRef.current && duration) {
-      const newTime = (newPercentage / 100) * duration;
-      audioRef.current.currentTime = newTime;
-      setCurrentTime(newTime);
-    }
-  };
-
   useEffect(() => {
+    const updateTime = () => {
+      if (audioRef.current) {
+        setCurrentTime(audioRef.current.currentTime);
+      }
+    };
+
+    const initializeDuration = () => {
+      if (audioRef.current) {
+        setDuration(audioRef.current.duration);
+      }
+    };
+
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.play();
@@ -39,32 +43,18 @@ export default function Player({ song }: PlayerProps) {
         audioRef.current.pause();
       }
 
-      const updateTime = () => {
-        if (audioRef.current) {
-          setCurrentTime(audioRef.current.currentTime);
-          setDuration(audioRef.current.duration);
-        }
-      };
-
       audioRef.current.addEventListener('timeupdate', updateTime);
-
-      return () => {
-        const audioElement = document.getElementById('audio-player');
-        if (audioElement) {
-          audioElement.removeEventListener('timeupdate', updateTime);
-        }
-      };
+      audioRef.current.addEventListener('loadedmetadata', initializeDuration);
     }
+
+    return () => {
+      const audioElement = document.getElementById('audio-player');
+      if (audioElement) {
+        audioElement.removeEventListener('timeupdate', updateTime);
+        audioElement.removeEventListener('loadedmetadata', initializeDuration);
+      }
+    };
   }, [isPlaying]);
-
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-  };
-
-  const percentage = duration ? (currentTime / duration) * 100 : 0;
-  const remainingTime = duration - currentTime;
 
   return (
     <div className={styles.container}>
@@ -80,33 +70,20 @@ export default function Player({ song }: PlayerProps) {
             <audio id="audio-player" ref={audioRef} src={audioURL} />
             {!isPlaying ? <Play /> : <Pause />}
           </div>
-          <div className={styles['play-description']}>
-            <div className={styles['title-container']}>
-              <div className={styles.title}>{song.song.title}</div>
-              <FavoriteIconButton songId={`${song.id}`} />
-            </div>
-            <div className={styles['album-info']}>
-              <div className={styles['album-info-item']}>
-                {song.song.artist}
-              </div>
-              <div className={styles['album-info-item']}>
-                {song.song.album.title}
-              </div>
-              <div className={styles['album-info-item']}>
-                {song.song.album.year}
-              </div>
-            </div>
-          </div>
+          <SongInfo
+            albumTitle={song.song.album.title}
+            albumYear={`${song.song.album.year}`}
+            artist={song.song.artist}
+            id={`${song.id}`}
+            title={song.song.title}
+          />
         </div>
-        <div className={styles.timer}>
-          <div>
-            <Slider percentage={percentage} onChange={handleSliderChange} />
-          </div>
-          <div className={styles['time-container']}>
-            <div className={styles.time}>{formatTime(currentTime)}</div>
-            <div className={styles.time}>{formatTime(remainingTime)}</div>
-          </div>
-        </div>
+        <TimeSlider
+          audioRef={audioRef}
+          duration={duration}
+          currentTime={currentTime}
+          setCurrentTime={setCurrentTime}
+        />
       </div>
     </div>
   );

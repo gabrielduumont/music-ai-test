@@ -12,7 +12,7 @@ export default function SongPlayer({ songs, song }: SongPlayerProps) {
   const relatedSongs = songs.filter((s) => song.related?.includes(s.id));
   return (
     <div className={styles.container}>
-      <Player song={song} />
+      <Player key={song.id} song={song} />
       <div className={styles.related}>
         <p className={styles['related-label']}>Related</p>
         <SongsList songs={relatedSongs} />
